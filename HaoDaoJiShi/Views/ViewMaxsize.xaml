@@ -1,0 +1,137 @@
+﻿<UserControl x:Class="HaoDaoJiShi.Views.ViewMaxsize"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:localcontrols="clr-namespace:HaoDaoJiShi.Controls"
+             xmlns:localconverter="clr-namespace:HaoDaoJiShi.Converter"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="900">
+    
+    <UserControl.Resources>
+        <localconverter:DatetimeStringConverter x:Key="cvtDate"/>
+        <localconverter:TimeSpanStringConverter x:Key="cvtTimeSpan"/>
+        <localconverter:DatetimeStringHHmmssConverter x:Key="cvtDateHHmmss"/>
+        <localconverter:DocFileNameConverter x:Key="cvtDocFileName"/>
+        <localconverter:SolidBrushColorConverter x:Key="cvtColor2SolidBrush" />
+    </UserControl.Resources>
+    
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#FF2A2A2A" Padding="10 0 10 0">
+            <TextBlock VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Left"
+                       FontWeight="Bold" Foreground="White" FontSize="20">
+                倒计时器 
+                <Run DataContext="{Binding session}"
+                    Text="{Binding docFilePath, Converter={StaticResource cvtDocFileName}}" />
+            </TextBlock>
+        </Border>
+
+        <Border Grid.Row="1" Background="{Binding session.settingFullscreen.daoJiShiBackground, 
+                                          Converter={StaticResource  cvtColor2SolidBrush}, 
+                                          FallbackValue='WhiteSmoke'}">
+            <TextBlock FontSize="180" VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"
+                       Text="{Binding session.daoJiShi.current, 
+                             Converter={StaticResource cvtTimeSpan},
+                             FallbackValue='00:00:30'}"
+                       Foreground="{Binding session.settingFullscreen.daoJiShiColor, 
+                                    Converter={StaticResource  cvtColor2SolidBrush},
+                                    FallbackValue='Black'}">
+            </TextBlock>
+        </Border>
+
+        <Border Grid.Row="2" Background="#FF2A2A2A" Padding="10 0 10 0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <localcontrols:ColorBkButton Grid.Column="0" 
+                            BrushBkNormal="#FF2A2A2A"
+                            BrushBkMouseOn="Gray"
+                            BrushBkMousePress="#FF2A2A2A"
+                            Foreground="White" 
+                            FontSize="14"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding cmdStartCount}">
+                        开始计时
+                    </localcontrols:ColorBkButton>
+
+                    <localcontrols:ColorBkButton Grid.Column="1" 
+                            BrushBkNormal="#FF2A2A2A"
+                            BrushBkMouseOn="Gray"
+                            BrushBkMousePress="#FF2A2A2A"
+                            Foreground="White" 
+                            FontSize="14"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding cmdResetCount}">
+                        复位计数器
+                    </localcontrols:ColorBkButton>
+
+                    <localcontrols:ColorBkButton Grid.Column="2" 
+                            BrushBkNormal="#FF2A2A2A"
+                            BrushBkMouseOn="Gray"
+                            BrushBkMousePress="#FF2A2A2A"
+                            Foreground="White" 
+                            FontSize="14"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding cmdNormal}">
+                        返回主界面
+                    </localcontrols:ColorBkButton>
+
+                    <localcontrols:ColorBkButton Grid.Column="3" 
+                            BrushBkNormal="#FF2A2A2A"
+                            BrushBkMouseOn="Gray"
+                            BrushBkMousePress="#FF2A2A2A"
+                            Foreground="White" 
+                            FontSize="14"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding cmdWinMinisize }">
+                        工具条模式
+                    </localcontrols:ColorBkButton>
+
+                    <localcontrols:ColorBkButton 
+                            Grid.Column="4" 
+                            BrushBkNormal="#FF2A2A2A"
+                            BrushBkMouseOn="#FF323232"
+                            BrushBkMousePress="#FF2A2A2A"
+                            Foreground="White" 
+                            FontSize="14"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding cmdSysSetting}">
+                        设置
+                    </localcontrols:ColorBkButton>
+                </Grid>
+
+                <TextBlock Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Right"
+                       FontWeight="Bold" Foreground="White" FontSize="20">
+                      
+                </TextBlock>
+
+            </Grid>
+            
+        </Border>
+        
+    </Grid>
+</UserControl>

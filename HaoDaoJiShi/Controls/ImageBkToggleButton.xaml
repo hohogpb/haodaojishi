@@ -1,0 +1,62 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:HaoDaoJiShi.Controls">
+
+    <Style TargetType="{x:Type controls:ImageBkToggleButton}">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" >
+            <Setter.Value>
+                <ImageBrush ImageSource="{Binding Path=ImageBkNormal, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ImageBkToggleButton}}}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template" >
+            <Setter.Value>
+                <!-- 模板内容，第一部分为为基本结构，第二部分就是触发器 -->
+                <ControlTemplate TargetType="{x:Type controls:ImageBkToggleButton}">
+                    <!-- Transparent 是为了鼠标能hit到 -->
+                    <Grid Background="Transparent">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  Margin="{TemplateBinding Padding}"                               
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                  RecognizesAccessKey="True" />
+                        </Border>
+                    </Grid>
+
+                    <!--触发器-->
+                    <ControlTemplate.Triggers>
+                        <!-- 鼠标移上 -->
+                        <Trigger Property="IsMouseOver" Value="True" >
+                            <Setter Property="Background" >
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{Binding Path=ImageBkMouseOn, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ImageBkToggleButton}}}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <!-- 鼠标按下 -->
+                        <Trigger Property="IsPressed" Value="True" >
+                            <Setter Property="Background" >
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{Binding Path=ImageBkMousePress, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ImageBkToggleButton}}}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                        <!-- 选中 -->
+                        <Trigger Property="IsChecked" Value="True" >
+                            <Setter Property="Background" >
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{Binding Path=ImageBkChecked, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ImageBkToggleButton}}}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

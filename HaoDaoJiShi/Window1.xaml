@@ -1,0 +1,29 @@
+﻿<Window x:Class="HaoDaoJiShi.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HaoDaoJiShi"
+        mc:Ignorable="d"
+        Title="Window1" Height="306" Width="547">
+
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <TextBox Text="{Binding testText, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="67,172,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.725,-3.087"/>
+        <TextBox Text="{Binding testText, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="67,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.725,-3.087"/>
+        <TextBlock Background="DimGray" Text="{Binding testText}" HorizontalAlignment="Left" Margin="247,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+    </Grid>
+    
+
+
+</Window>

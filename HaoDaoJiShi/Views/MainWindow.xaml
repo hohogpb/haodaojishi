@@ -1,0 +1,32 @@
+﻿<Window x:Class="HaoDaoJiShi.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:localviews="clr-namespace:HaoDaoJiShi.Views"
+        xmlns:localviewmodels="clr-namespace:HaoDaoJiShi.ViewModels"
+        xmlns:localcontrols="clr-namespace:HaoDaoJiShi.Controls"
+        Title="MainWindow" Height="248" Width="441"
+        AllowsTransparency="True"
+        ResizeMode="CanMinimize"
+        WindowStyle="None"
+        Background="Transparent"
+        Topmost="True"              
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        MouseDown="Window_MouseDown">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type localviewmodels:ViewMaxsizeModel}">
+            <localviews:ViewMaxsize/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type localviewmodels:ViewMinSizeModel}">
+            <localviews:ViewMinSize/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type localviewmodels:ViewNormalModel}">
+            <localviews:ViewNormal/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <ContentPresenter Content="{Binding currentViewModel}"/>
+
+</Window>

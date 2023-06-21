@@ -1,0 +1,246 @@
+﻿<Window x:Class="HaoDaoJiShi.Views.ViewSetting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HaoDaoJiShi.Views"
+        xmlns:localcontrols="clr-namespace:HaoDaoJiShi.Controls"
+        xmlns:localconverter="clr-namespace:HaoDaoJiShi.Converter"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Height="405" Width="528" 
+        WindowStartupLocation="CenterOwner" 
+        Title="选择/编辑方案">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Text}" />
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <TabControl Margin="10" BorderBrush="Gainsboro">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="4,4,0,0" Margin="2,0">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="LightSkyBlue" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            
+            <!-- 方案编辑 -->
+            <TabItem Header="方案编辑">
+
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="70"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Grid.Column="0" Margin="0 0 5 0" 
+                     DataContext="{Binding session}" Text="{Binding docFilePath, Mode=OneWay}"
+                     ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+                        <Button Grid.Column="1" Command="{Binding cmdChooseProject}">选择方案</Button>
+                        <Button Grid.Column="2" Margin="5 0 0 0" Command="{Binding cmdSaveProject}">保存方案</Button>
+                        <Button Grid.Column="3" Margin="5 0 0 0" Command="{Binding cmdSaveAsProject}">另存方案</Button>
+                    </Grid>
+
+                    <!-- 上方部分 -->
+                    <Grid Grid.Row="1" DataContext="{Binding docEditVM}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" TextAlignment="Left">计时长度 :</TextBlock>
+                            <TextBox Grid.Column="1" Text="{Binding lengthHour}" />
+                            <TextBlock Grid.Column="2">时</TextBlock>
+                            <TextBox Grid.Column="3" Text="{Binding lengthMinute}" />
+                            <TextBlock Grid.Column="4">分</TextBlock>
+                            <TextBox Grid.Column="5" Text="{Binding lengthSecond}" />
+                            <TextBlock Grid.Column="6">秒</TextBlock>
+                        </Grid>
+
+                        <Grid Grid.Row="1" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" TextAlignment="Left">提示时间1:</TextBlock>
+                            <TextBox Grid.Column="1" Text="{Binding alter1Hour}"/>
+                            <TextBlock Grid.Column="2">时</TextBlock>
+                            <TextBox Grid.Column="3" Text="{Binding alter1Minute}"/>
+                            <TextBlock Grid.Column="4">分</TextBlock>
+                            <TextBox Grid.Column="5" Text="{Binding alter1Second}"/>
+                            <TextBlock Grid.Column="6">秒</TextBlock>
+                        </Grid>
+
+                        <Grid Grid.Row="2" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" TextAlignment="Left">提示时间2:</TextBlock>
+                            <TextBox Grid.Column="1" Text="{Binding alter2Hour}"/>
+                            <TextBlock Grid.Column="2">时</TextBlock>
+                            <TextBox Grid.Column="3" Text="{Binding alter2Minute}"/>
+                            <TextBlock Grid.Column="4">分</TextBlock>
+                            <TextBox Grid.Column="5" Text="{Binding alter2Second}"/>
+                            <TextBlock Grid.Column="6">秒</TextBlock>
+                        </Grid>
+
+                        <Grid Grid.Row="3" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" TextAlignment="Left">提示声音:</TextBlock>
+                            <TextBox Grid.Column="1" Text="{Binding alertMusic}"></TextBox>
+                            <Button Grid.Column="2" Margin="5 0 5 0" Command="{Binding cmdChooseAlertMusic}">...</Button>
+                            <Button Grid.Column="3" Command="{Binding cmdTestAlertMusic}">测试</Button>
+                        </Grid>
+
+                        <Grid Grid.Row="4" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" TextAlignment="Left">结束声音:</TextBlock>
+                            <TextBox Grid.Column="1" Text="{Binding endMusic}"></TextBox>
+                            <Button Grid.Column="2" Margin="5 0 5 0" Command="{Binding cmdChooseEndMusic}">...</Button>
+                            <Button Grid.Column="3" Command="{Binding cmdTestEndMusic}">测试</Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!-- 正常大小窗口配置项 -->
+            <TabItem Header="正常窗口" >
+                <Grid>
+                    <StackPanel>
+                        
+                        <Grid Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0">倒计时颜色</TextBlock>
+                            <xctk:ColorPicker Grid.Column="1" VerticalAlignment="Center"
+                                              SelectedColor="{Binding session.settingNormalView.daoJiShiColor}"/>
+                        </Grid>
+                       
+                        <Grid Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0">背景</TextBlock>
+                            <xctk:ColorPicker Grid.Column="1" VerticalAlignment="Center" 
+                                              SelectedColor="{Binding session.settingNormalView.daoJiShiBackground}"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>                
+            </TabItem>
+
+            <!-- 小窗口配置项 -->
+            <TabItem Header="小窗口" >
+                <Grid>
+                </Grid>
+            </TabItem>
+            
+            <!-- 全屏窗口配置项 -->
+            <TabItem Header="全屏窗口" >
+                <Grid>
+                    <StackPanel>
+                        <Grid Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0">倒计时颜色</TextBlock>
+                            <xctk:ColorPicker Grid.Column="1" VerticalAlignment="Center" 
+                                              SelectedColor="{Binding session.settingFullscreen.daoJiShiColor}" />
+                        </Grid>
+
+                        <Grid Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0">背景</TextBlock>
+                            <xctk:ColorPicker Grid.Column="1" VerticalAlignment="Center"
+                                              SelectedColor="{Binding session.settingFullscreen.daoJiShiBackground}"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            
+        </TabControl>
+    </Grid>
+</Window>
